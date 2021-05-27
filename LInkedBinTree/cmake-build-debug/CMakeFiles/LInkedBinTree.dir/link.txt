@@ -1,0 +1,3 @@
+"D:\CLion 2020.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\LInkedBinTree.dir/objects.a
+D:\mingw64\bin\ar.exe cr CMakeFiles\LInkedBinTree.dir/objects.a @CMakeFiles\LInkedBinTree.dir\objects1.rsp
+D:\mingw64\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\LInkedBinTree.dir/objects.a -Wl,--no-whole-archive  -o LInkedBinTree.exe -Wl,--out-implib,libLInkedBinTree.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\LInkedBinTree.dir\linklibs.rsp

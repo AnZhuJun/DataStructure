@@ -1,0 +1,3 @@
+"D:\CLion 2020.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\DLinkNode.dir/objects.a
+D:\mingw64\bin\ar.exe cr CMakeFiles\DLinkNode.dir/objects.a @CMakeFiles\DLinkNode.dir\objects1.rsp
+D:\mingw64\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\DLinkNode.dir/objects.a -Wl,--no-whole-archive  -o DLinkNode.exe -Wl,--out-implib,libDLinkNode.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\DLinkNode.dir\linklibs.rsp
