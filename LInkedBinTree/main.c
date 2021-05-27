@@ -7,13 +7,12 @@ typedef char ElemType;
 
 typedef struct Node{
     ElemType data;
-    struct Node *prior;
-    struct Node *next;
+    struct Node *lchild,*rchild;
 }BTNode;
 
-void CreateBTree(BTNode *b,ElemType a[])
+BTNode *CreateBTree(ElemType *a)
 {
-    BTNode *St[MaxSize],*p;
+    BTNode *St[MaxSize],*p,*b;
     int top = -1,k,j=0;
     char ch;
     b = NULL;
@@ -37,16 +36,16 @@ void CreateBTree(BTNode *b,ElemType a[])
             default:
                 p = (BTNode *)malloc(sizeof (BTNode));
                 p->data = ch;
-                p->prior = p->next = NULL;
+                p->lchild = p->rchild = NULL;
                 if(b==NULL)
                     b=p;
                 else
                 {
                     switch (k)
                     {
-                        case 1:St[top]->prior = p;
+                        case 1:St[top]->lchild = p;
                             break;
-                        case 2:St[top]->next = p;
+                        case 2:St[top]->rchild = p;
                             break;
                     }
                 }
@@ -54,6 +53,8 @@ void CreateBTree(BTNode *b,ElemType a[])
         j++;
         ch = a[j];
     }
+
+    return b;
 }
 
 void Display(BTNode *b)
@@ -61,13 +62,13 @@ void Display(BTNode *b)
     if(b!=NULL)
     {
         printf("%c",b->data);
-        if(b->prior != NULL || b->next != NULL)
+        if(b->lchild != NULL || b->rchild != NULL)
         {
             printf("(");
-            Display(b->prior);
-            if(b->next != NULL)
+            Display(b->lchild);
+            if(b->rchild != NULL)
                 printf(",");
-            Display(b->next);
+            Display(b->rchild);
             printf(")");
         }
     }
@@ -85,20 +86,36 @@ BTNode *FindNode(BTNode *b, ElemType x)
     }
     else
     {
-        p = FindNode(b->prior, x);
+        p = FindNode(b->lchild, x);
         if(p!=NULL)
             return p;
         else
-            return FindNode(b->next, x);
+            return FindNode(b->rchild, x);
     }
 }
 
+int Height(BTNode *b)
+{
+    int lchild,rchild;
+    if(b==NULL)
+        return 0;
+    else
+    {
+        lchild = Height(b->lchild);
+        rchild = Height(b->rchild);
+        return (lchild > rchild)?(lchild + 1):(rchild + 1);
+    }
+}
 
 int main() {
-    BTNode b,*c;
-    CreateBTree(&b,"A(B(D(,G)),C(E,F))");
-    Display(&b);
-//    c = FindNode(&b,'A');
+    BTNode *b,*c;
+    b = CreateBTree("A(B(D(,G)),C(E,F))");
+    printf("%d\n",Height(b));
+
+    Display(b);
+    printf("\n");
+    c = FindNode(b,'A');
+
 
     return 0;
 }
